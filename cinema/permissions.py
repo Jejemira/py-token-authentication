@@ -14,7 +14,11 @@ class IsAdminOrIfAuthenticatedReadOnly(
         if user and user.is_staff:
             return True
 
-        view_name = getattr(view, "basename", "") or view.__class__.__name__.lower()
+        view_name = getattr(
+            view,
+            "basename",
+            ""
+        ) or view.__class__.__name__.lower()
         if "order" in view_name:
             if request.method in SAFE_METHODS or request.method == "POST":
                 return user and user.is_authenticated
