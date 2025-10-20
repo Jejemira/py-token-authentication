@@ -12,7 +12,7 @@ class IsAdminOrIfAuthenticatedReadOnly(
             return True
 
         if view.__class__.__name__ == "OrderViewSet":
-            if request.method in ["GET", "POST"]:
+            if request.method in SAFE_METHODS or request.method == "POST":
                 return user and user.is_authenticated
             return False
 
