@@ -9,4 +9,8 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += [path("__debug__/", include("debug_toolbar.urls"))]
+    try:
+        if "debug_toolbar" in settings.INSTALLED_APPS:
+            urlpatterns += [path("__debug__/", include("debug_toolbar.urls"))]
+    except ImportError:
+        pass
